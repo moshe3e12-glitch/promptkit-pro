@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: http://promptkithq.com/sitemap.xml
