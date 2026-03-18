@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free AI Prompt Generator — PromptKit Pro</title>
+<meta name="description" content="Get a random professional AI prompt every time. Free prompt generator for ChatGPT, Claude, and Gemini.">
+<meta property="og:title" content="Free AI Prompt Generator">
+<meta property="og:description" content="Random professional AI prompts. Copy, paste, get results.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,sans-serif;background:#0a0a0a;color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:2rem}
+h1{font-size:2.5rem;margin-bottom:0.5rem;text-align:center}
+.sub{color:#888;font-size:1.1rem;margin-bottom:2rem;text-align:center}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:16px;padding:2rem;max-width:700px;width:100%;margin-bottom:1.5rem}
+.category{color:#eab308;font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem}
+.prompt-title{font-size:1.3rem;font-weight:700;margin-bottom:1rem}
+.prompt-text{background:#111;border:1px solid #222;border-radius:8px;padding:1.5rem;font-family:monospace;font-size:0.9rem;line-height:1.6;color:#ccc;white-space:pre-wrap;margin-bottom:1rem;max-height:400px;overflow-y:auto}
+.tip{font-size:0.85rem;color:#eab308;opacity:0.8}
+.btn{display:inline-block;padding:0.8rem 2rem;border-radius:12px;font-weight:700;font-size:1rem;cursor:pointer;border:none;transition:all 0.2s}
+.btn-primary{background:linear-gradient(135deg,#eab308,#f97316);color:#000}
+.btn-primary:hover{transform:scale(1.05)}
+.btn-secondary{background:#222;color:#fff;border:1px solid #444;margin-left:0.5rem}
+.btn-secondary:hover{background:#333}
+.actions{display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem}
+.cta{background:#1a1a1a;border:1px solid #eab308;border-radius:16px;padding:2rem;max-width:700px;width:100%;text-align:center}
+.cta h2{font-size:1.5rem;margin-bottom:0.5rem}
+.cta p{color:#888;margin-bottom:1rem}
+.counter{color:#666;font-size:0.85rem;margin-bottom:1rem}
+a{color:#eab308;text-decoration:none}
+</style>
+</head>
+<body>
+<h1>🎲 AI Prompt Generator</h1>
+<p class="sub">Free professional prompts. Hit the button, copy, paste into any AI.</p>
+<div class="counter" id="counter">Prompt 1 of 13 free prompts</div>
+<div class="card" id="card">
+<div class="category" id="cat">Loading...</div>
+<div class="prompt-title" id="title"></div>
+<div class="prompt-text" id="prompt"></div>
+<div class="tip" id="tip"></div>
+</div>
+<div class="actions">
+<button class="btn btn-primary" onclick="nextPrompt()">🎲 Next Prompt</button>
+<button class="btn btn-secondary" onclick="copyPrompt()">📋 Copy</button>
+</div>
+<div class="cta">
+<h2>Like these? There's 200+ more.</h2>
+<p>Business, marketing, coding, writing, productivity — all battle-tested.</p>
+<a href="/" class="btn btn-primary" style="text-decoration:none">Get PromptKit Pro — $19</a>
+</div>
+<script>
+const prompts=[
+{cat:"Business",title:"SWOT Analysis Deep Dive",prompt:"Act as a McKinsey strategic consultant. Perform a SWOT analysis for [company/product] in the [industry] space.\n\nRequirements:\n- Each quadrant: exactly 5 points with specific, actionable insights\n- Strengths/Weaknesses: tie to measurable metrics\n- Opportunities/Threats: include timeline estimates (6mo, 1yr, 3yr)\n- End with \"So What?\" section: the 3 most critical strategic moves\n\nFormat as a clean table with the So What section below.",tip:"💡 The \"So What?\" section forces AI past analysis into action."},
+{cat:"Business",title:"Business Model Pressure Test",prompt:"I'm considering starting [business idea]. Act as a skeptical VC partner doing due diligence.\n\n1. Poke 5 holes in this idea (be specific, not generic)\n2. For each hole, rate how fatal it is (1-5) and suggest a fix\n3. Identify the single riskiest assumption I'm making\n4. Design a $100 experiment to validate that assumption in 1 week\n5. Give me a honest \"invest or pass\" verdict with reasoning",tip:"💡 The VC framing gets much sharper criticism than asking AI to \"evaluate my idea\"."},
+{cat:"Marketing",title:"Cold Email That Gets Replies",prompt:"Write a cold outreach email for [product/service] targeting [job title] at [company type].\n\nConstraints:\n- Subject line: max 6 words, curiosity-driven, no clickbait\n- Opening line: reference something specific about their company\n- Body: max 5 sentences total\n- Include one specific, quantified result from a similar customer\n- CTA: a question, not a pitch\n- Tone: peer-to-peer, not salesy\n\nWrite 3 variations: results-focused, curiosity-focused, and pain-point-focused.",tip:"💡 The constraints prevent AI from writing long, formal emails nobody reads."},
+{cat:"Marketing",title:"Landing Page Copy Formula",prompt:"Write landing page copy for [product] targeting [audience].\n\nStructure:\n1. Hero: Headline (max 10 words, benefit-driven) + subheadline (the \"how\")\n2. Problem: 3 pain points the reader feels today (use \"you\" language)\n3. Solution: How we solve it (features → benefits)\n4. Social proof: Write 3 realistic testimonial quotes\n5. CTA: Primary button text + supporting text below it\n\nTone: confident but not arrogant. Conversational, not corporate.\nDo NOT use: \"revolutionize\", \"game-changing\", \"leverage\", \"synergy\"",tip:"💡 Banning corporate buzzwords forces genuinely good copy."},
+{cat:"Marketing",title:"Ad Copy Generator",prompt:"Create 5 ad variations for [product/service] targeting [audience].\n\nFor each ad:\n- Hook (first line that stops the scroll — max 10 words)\n- Body (2-3 sentences, problem→solution format)\n- CTA (clear, specific action)\n\nVariation styles:\n1. Pain point → solution\n2. Curiosity / question\n3. Social proof / numbers\n4. Contrarian / myth-busting\n5. Urgency / scarcity\n\nPlatform: [Facebook/Instagram/Google/LinkedIn]",tip:"💡 Testing all 5 styles lets you find what resonates with YOUR audience."},
+{cat:"Coding",title:"Senior Dev Code Review",prompt:"Review this code as a senior engineer with 15 years of experience:\n\n[paste code]\n\nStructure your review:\n1. 🔴 Critical Issues (must fix before merge)\n2. 🟡 Improvements (should fix, not blocking)\n3. 🟢 Nitpicks (style, take or leave)\n4. ✅ What's Good (acknowledge well-written parts)\n\nFor each issue: explain WHY it's a problem, show the fix, rate severity.",tip:"💡 The severity ratings prevent the AI from being too negative or too superficial."},
+{cat:"Coding",title:"Debug Partner",prompt:"I have a bug: [describe the bug, what you expected vs what happened]\n\nWalk me through isolating it like a senior engineer doing pair debugging:\n- Ask me questions ONE AT A TIME\n- After each answer, form a hypothesis\n- Suggest a specific check or test to narrow it down\n- Don't jump to solutions until we've found the root cause\n\nStart with your first question.",tip:"💡 One-at-a-time prevents the AI from dumping 10 suggestions at once."},
+{cat:"Coding",title:"API Documentation Writer",prompt:"Write API documentation for this endpoint:\n\n[paste your route/controller code]\n\nInclude:\n- HTTP method & path\n- Description (what it does, in plain English)\n- Authentication requirements\n- Request parameters (path, query, body) with types and examples\n- Response format with example JSON\n- Error responses (common ones)\n- Code example (curl + JavaScript fetch)\n\nFormat as Markdown. Be concise but complete.",tip:"💡 Paste real code — AI writes better docs from source than from descriptions."},
+{cat:"Writing",title:"Blog Post Architect",prompt:"Create a detailed outline for a blog post about [topic] targeting [audience].\n\nInclude:\n- Title options (3, with power words)\n- H2/H3 structure (full outline)\n- Key points per section (2-3 bullets each)\n- One data point or example to research per section\n- Compelling hook (first 2 sentences)\n- Meta description (155 chars)\n\nTarget keyword: [primary keyword]\nWord count target: [e.g., 1500]",tip:"💡 Having the AI plan the structure first produces much better articles."},
+{cat:"Writing",title:"Social Media Hook Generator",prompt:"Generate 10 social media hooks for [topic/product] on [platform].\n\nRules:\n- First line must create curiosity or tension\n- No clickbait — the content must deliver on the hook\n- Mix formats: question, bold claim, story opener, number/stat, contrarian take\n- Each hook should work standalone (no context needed)\n- Include a \"why this works\" note for each one\n\nAudience: [describe]\nGoal: [awareness/engagement/clicks]",tip:"💡 The \"why this works\" forces AI to understand persuasion, not just generate text."},
+{cat:"Productivity",title:"Meeting → Actions Converter",prompt:"Here are my raw meeting notes:\n[paste]\n\nExtract:\n1. 📌 Key decisions made (with who decided)\n2. ✅ Action items (owner + deadline for each)\n3. ❓ Open questions that need follow-up\n4. ⚠️ Risks or concerns raised\n5. 📅 Next steps / follow-up date\n\nFormat as a clean summary I can paste into Slack/Teams.\nKeep it under 200 words.",tip:"💡 Paste messy notes — the messier the input, the more value AI adds."},
+{cat:"Productivity",title:"Decision Matrix Builder",prompt:"Help me decide between: [option A], [option B], [option C]\n\nContext: [brief situation]\n\nBuild a weighted decision matrix:\n1. Suggest 6-8 relevant criteria for this decision\n2. Weight them by importance (1-5)\n3. Score each option 1-5 on each criterion\n4. Calculate weighted scores\n5. Give a recommendation with reasoning\n\nAlso flag: any criteria where one option is a clear \"dealbreaker\" regardless of total score.",tip:"💡 The dealbreaker flag catches things a spreadsheet would miss."},
+{cat:"Business",title:"Competitor Research Framework",prompt:"Create a competitive intelligence brief for [your product] vs [competitor 1], [competitor 2], [competitor 3].\n\nFor each competitor analyze:\n1. Core value proposition (one sentence)\n2. Pricing strategy & positioning\n3. Target customer profile\n4. Their biggest strength we should learn from\n5. Their biggest vulnerability we can exploit\n6. What customers complain about (check review sites)\n\nEnd with: \"3 things we should steal, 3 things we should avoid, and our unique angle\"",tip:"💡 The \"steal/avoid/angle\" framework turns research into strategy."}
+];
+let idx=0;
+function show(){
+const p=prompts[idx];
+document.getElementById('cat').textContent=p.cat;
+document.getElementById('title').textContent=p.title;
+document.getElementById('prompt').textContent=p.prompt;
+document.getElementById('tip').textContent=p.tip;
+document.getElementById('counter').textContent=`Prompt ${idx+1} of ${prompts.length} free prompts`;
+}
+function nextPrompt(){idx=(idx+1)%prompts.length;show();}
+function copyPrompt(){navigator.clipboard.writeText(prompts[idx].prompt);const b=event.target;b.textContent='✅ Copied!';setTimeout(()=>b.textContent='📋 Copy',1500);}
+show();
+</script>
+</body>
+</html>
